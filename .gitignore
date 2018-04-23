@@ -30,6 +30,7 @@ wheels/
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+.idea/
 
 # Installer logs
 pip-log.txt
@@ -84,7 +85,10 @@ celerybeat-schedule
 
 # virtualenv
 .venv
-venv/
+venv/lib
+venv/bin
+venv/include
+venv/pip-selfcheck.json
 ENV/
 
 # Spyder project settings
