@@ -37,6 +37,11 @@ newdata = xdata
 newdata = np.zeros(shape=(140,1152,1152))
 np.c_[xdata, newdata]
 
+for i in range(0,140):
+    for j in range(0,1152):
+        for k in range(0,1152):
+            newdata[i][j][k] = xdata[i][j][k%3]
+
 xdata = newdata
 
 print (xdata[:100].shape)
@@ -81,7 +86,7 @@ print(X_train.shape)
 print("Y_train:")
 print(Y_train.shape)
 
-model.fit(X_train, Y_train, batch_size=20, nb_epoch=10, verbose=1)
+model.fit(X_train, Y_train, batch_size=25, epochs=4, verbose=1)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 print("Score:")
