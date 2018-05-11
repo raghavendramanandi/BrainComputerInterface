@@ -33,17 +33,6 @@ for i in range(1,140):
 
 ydate = ydate[:,0]
 
-newdata = xdata
-newdata = np.zeros(shape=(140,1152,1152))
-np.c_[xdata, newdata]
-
-for i in range(0,140):
-    for j in range(0,1152):
-        for k in range(0,1152):
-            newdata[i][j][k] = xdata[i][j][k%3]
-
-xdata = newdata
-
 print (xdata[:100].shape)
 print (ydata[:100].shape)
 print (xdata[100:].shape)
@@ -58,8 +47,8 @@ X_test = xdata[100:]
 
 y_test = ydate[100:]
 
-X_train = X_train.reshape(X_train.shape[0], 1152, 1152,1)
-X_test = X_test.reshape(X_test.shape[0], 1152, 1152,1)
+X_train = X_train.reshape(X_train.shape[0], 1152, 3,1)
+X_test = X_test.reshape(X_test.shape[0], 1152, 3,1)
 
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
@@ -69,9 +58,9 @@ Y_train = np_utils.to_categorical(y_train)
 Y_test = np_utils.to_categorical(y_test)
 
 model = Sequential()
-model.add(Convolution2D(32, 3, 3, activation='relu', input_shape=(1152,1152,1)))
+model.add(Convolution2D(32, 1, 1, activation='relu', input_shape=(1152,3,1)))
 model.add(Convolution2D(10, 1, activation='relu'))
-model.add(Convolution2D(2, 1150))
+model.add(Convolution2D(2, 3))
 model.add(Flatten())
 model.add(Activation('softmax'))
 
