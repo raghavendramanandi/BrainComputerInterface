@@ -9,14 +9,15 @@ from keras.layers import Activation, Flatten
 from keras.layers import Convolution2D
 from keras.layers.core import Dense
 from keras.utils import np_utils
+import pywt
 
 
 def spectrum (vector):
     (cA, cD) = pywt.dwt(vector, 'db3')
     return (cA, cD)
 
-# file = "/Users/raghavendra/Documents/python/VolumeForecasting/venv/resources/dataset_BCIcomp1.mat"
-file = "/Users/rmramesh/A/Volume-Forecast/venv/resources/dataset_BCIcomp1.mat"
+file = "/Users/raghavendra/Documents/python/VolumeForecasting/venv/resources/dataset_BCIcomp1.mat"
+# file = "/Users/rmramesh/A/Volume-Forecast/venv/resources/dataset_BCIcomp1.mat"
 data = scipy.io.loadmat(file)
 
 xdata = data.get("x_train")
@@ -24,12 +25,15 @@ xdata = xdata.transpose(2,1,0)
 xprocessed = np.zeros([140,576,576], dtype=float)
 
 for i in range(0,140):
-    for j in range(0,3):
-        xprocessed[i][j] = spectrum(xdata[i][j])
+    for j in range(0,576):
+        xprocessed[i][j] = np.zeros([576], dtype=float)
 
 for i in range(0,140):
-    for j in range(3,575):
-        xprocessed[i][j] = np.zeros([576], dtype=float)
+    for j in range(0,3):
+        (cA, cD) = spectrum(xdata[i][j])
+        xprocessed[i][j*2] = cA[:576]
+        xprocessed[i][(j*2)+1] = cD[:576]
+
 
 # x1 = np.copy(xprocessed[0][0])
 
