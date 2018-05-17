@@ -12,11 +12,8 @@ from keras.utils import np_utils
 
 
 def spectrum (vector):
-    '''get the power spectrum of a vector of raw EEG data'''
-    A = np.fft.fft(vector)
-    ps = np.abs(A)**2
-    ps = ps[:len(ps)//2]
-    return ps
+    (cA, cD) = pywt.dwt(vector, 'db3')
+    return (cA, cD)
 
 # file = "/Users/raghavendra/Documents/python/VolumeForecasting/venv/resources/dataset_BCIcomp1.mat"
 file = "/Users/rmramesh/A/Volume-Forecast/venv/resources/dataset_BCIcomp1.mat"
@@ -113,6 +110,3 @@ print("y test")
 
 print(y_pred[:9])
 print(y_test[:9])
-
-
-
