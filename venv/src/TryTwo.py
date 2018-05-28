@@ -9,6 +9,7 @@ from keras.layers import Activation, Flatten
 from keras.layers import Convolution2D
 from keras.layers.core import Dense
 from keras.utils import np_utils
+import pywt
 
 
 def CWavelets(vector):
@@ -24,6 +25,7 @@ def spectrum (vector):
 
 # file = "/Users/raghavendra/Documents/python/VolumeForecasting/venv/resources/dataset_BCIcomp1.mat"
 file = "/Users/rmramesh/A/Volume-Forecast/venv/resources/dataset_BCIcomp1.mat"
+
 data = scipy.io.loadmat(file)
 
 xdata = data.get("x_train")

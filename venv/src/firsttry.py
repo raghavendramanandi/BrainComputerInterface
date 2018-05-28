@@ -18,8 +18,7 @@ def spectrum (vector):
     ps = ps[:len(ps)//2]
     return ps
 
-# file = "/Users/raghavendra/Documents/python/VolumeForecasting/venv/resources/dataset_BCIcomp1.mat"
-file = "/Users/rmramesh/A/Volume-Forecast/venv/resources/dataset_BCIcomp1.mat"
+file = "/Users/raghavendra/Documents/python/VolumeForecasting/venv/resources/dataset_BCIcomp1.mat"
 data = scipy.io.loadmat(file)
 
 xdata = data.get("x_train")
@@ -81,10 +80,9 @@ print(Y_train.shape)
 print(Y_test.shape)
 
 model = Sequential()
-model.add(Convolution2D(32, 1, 1, activation='relu', input_shape=(576,576,1)))
+model.add(Convolution2D(32, 3, 3, activation='relu', input_shape=(576,576,1)))
 model.add(Convolution2D(10, 1, activation='relu'))
-model.add(Convolution2D(10, 1, activation='relu'))
-model.add(Convolution2D(2, 576))
+model.add(Convolution2D(2, 574))
 model.add(Flatten())
 model.add(Activation('softmax'))
 
