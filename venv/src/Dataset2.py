@@ -25,7 +25,7 @@ def scale_linear_bycolumn(rawpoints, high=100.0, low=0.0):
     rng = maxs - mins
     return high - (((high - low) * (maxs - rawpoints)) / rng)
 
-file = "/Users/rmramesh/Downloads/EEG_BCI_MI_AllSub/SubC_6chan_2LR_s1.mat"
+file = "/Users/rmramesh/Downloads/EEG_BCI_MI_AllSub/SubC_6chan_2LF_s1.mat"
 data = scipy.io.loadmat(file)
 print(data.keys())
 

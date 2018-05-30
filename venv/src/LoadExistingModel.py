@@ -21,7 +21,7 @@ def spectrum (vector):
     ps = ps[:len(ps)//2]
     return ps
 
-file = "/Users/rmramesh/Downloads/EEG_BCI_MI_AllSub/SubC_6chan_2LR_s1.mat"
+file = "/Users/rmramesh/Downloads/EEG_BCI_MI_AllSub/SubC_6chan_2LF_s2.mat"
 data = scipy.io.loadmat(file)
 print(data.keys())
 
@@ -49,15 +49,7 @@ for i in range(0,numberOfItems):
         # xprocessed[i][j] = ca[2:]
         # xprocessed[i][28+j] = cb[2:]
         xprocessed[i][j] = spectrum(xdata[i][j])
-        xprocessed[i][j] = xprocessed[i][j] * 1000000
-
-num = 24
-print(ydata[num])
-# plt.plot(xdata[9][0], color='black', linewidth=1)
-plt.plot((xprocessed[num][0]), color='green', linewidth=1)
-plt.show()
-
-exit(0)
+        xprocessed[i][j] = xprocessed[i][j] * 100000000
 
 ydata = ydata.transpose(1,0)
 ydata = list(ydata[0])
