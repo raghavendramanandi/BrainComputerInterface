@@ -110,7 +110,7 @@ print(X_train.shape)
 print("Y_train:")
 print(Y_train.shape)
 
-model.fit(X_train, Y_train, batch_size=25, epochs=1, verbose=1)
+model.fit(X_train, Y_train, batch_size=25, epochs=3, verbose=1)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 
