@@ -114,11 +114,11 @@ print(Y_train.shape)
 print(Y_test.shape)
 
 model = Sequential()
-model.add(Convolution2D(32, 1, 1, activation='relu', input_shape=(nrap,nrap,1)))
-model.add(Convolution2D(40, 1, activation='relu'))
+model.add(Convolution2D(32, 3, 3, activation='relu', input_shape=(nrap,nrap,1)))
+# model.add(Convolution2D(40, 1, activation='relu'))
 model.add(Convolution2D(20, 1, activation='relu'))
 model.add(Convolution2D(10, 1, activation='relu'))
-model.add(Convolution2D(2, (nrap)))
+model.add(Convolution2D(2, (nrap-2)))
 model.add(Flatten())
 model.add(Activation('softmax'))
 
@@ -128,7 +128,7 @@ model.compile(loss='categorical_crossentropy',
              optimizer='adam',
              metrics=['accuracy'])
 
-model.fit(X_train, Y_train, batch_size=70, epochs=3, verbose=1)
+model.fit(X_train, Y_train, batch_size=60, epochs=4, verbose=1)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 
