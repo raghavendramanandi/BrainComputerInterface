@@ -93,7 +93,8 @@ print(Y_test.shape)
 
 model = Sequential()
 model.add(Convolution2D(32, 3, 3, activation='relu', input_shape=(576,576,1)))
-model.add(Convolution2D(10, 1, activation='relu'))
+model.add(Convolution2D(40, 1, activation='relu'))
+model.add(Convolution2D(20, 1, activation='relu'))
 model.add(Convolution2D(10, 1, activation='relu'))
 # model.add(Dense(500, activation='relu'))
 model.add(Convolution2D(2, 574))
@@ -111,7 +112,7 @@ print(X_train.shape)
 print("Y_train:")
 print(Y_train.shape)
 
-model.fit(X_train, Y_train, batch_size=40, epochs=2, verbose=1)
+model.fit(X_train, Y_train, batch_size=40, epochs=3, verbose=1)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 model.save('my_model.h5')
