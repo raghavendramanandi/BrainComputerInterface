@@ -20,13 +20,17 @@ def spectrum (vector):
     ps = ps[:len(ps)//2]
     return ps
 
-def scale_linear_bycolumn(rawpoints, high=100.0, low=0.0):
-    mins = np.min(rawpoints, axis=0)
-    maxs = np.max(rawpoints, axis=0)
-    rng = maxs - mins
-    return high - (((high - low) * (maxs - rawpoints)) / rng)
+def resultClassifier(res, percent, band):
+    pec = percent/100
+    bandPec = band/100
+    if res >= pec + bandPec:
+        return "Type-1"
+    if res <= pec - bandPec:
+        return "Type-2"
+    else:
+        return "NA"
 
-file = "/Users/rmramesh/Downloads/EEG_BCI_MI_AllSub/SubC_6chan_2LF_s2.mat"
+file = "/Users/rmramesh/Downloads/EEG_BCI_MI_AllSub/SubC_6chan_2LF_s3.mat"
 data = scipy.io.loadmat(file)
 print(data.keys())
 
@@ -117,7 +121,5 @@ print(Y_test.shape)
 model = load_model('../outputmodel1/Dataset2-2.h5')
 y_pred = model.predict(X_test.reshape(X_test.shape[0], nrap, nrap,1))
 
-print("y predict:")
-print(y_pred[:10])
-print("y test:")
-print(y_test[:10])
+for i in range(0,len(y_pred)):
+    print(y_pred[i][0], ",", y_pred[i][1], ",", y_test[i], resultClassifier(y_pred[i][1],60,5))

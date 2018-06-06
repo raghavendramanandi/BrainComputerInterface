@@ -25,6 +25,16 @@ def scale_linear_bycolumn(rawpoints, high=100.0, low=0.0):
     rng = maxs - mins
     return high - (((high - low) * (maxs - rawpoints)) / rng)
 
+def resultClassifier(res, percent, band):
+    pec = percent/100
+    bandPec = band/100
+    if res >= pec + bandPec:
+        return "Type-1"
+    if res <= pec - bandPec:
+        return "Type-2"
+    else:
+        return "NA"
+
 file = "/Users/rmramesh/Downloads/EEG_BCI_MI_AllSub/SubC_6chan_2LF_s1.mat"
 data = scipy.io.loadmat(file)
 print(data.keys())
@@ -115,7 +125,7 @@ print(Y_test.shape)
 
 model = Sequential()
 model.add(Convolution2D(32, 3, 3, activation='relu', input_shape=(nrap,nrap,1)))
-model.add(Convolution2D(40, 1, activation='relu'))
+model.add(Convolution2D(30, 1, activation='relu'))
 model.add(Convolution2D(20, 1, activation='relu'))
 model.add(Convolution2D(10, 1, activation='relu'))
 model.add(Convolution2D(2, (nrap-2)))
@@ -128,7 +138,7 @@ model.compile(loss='categorical_crossentropy',
              optimizer='adam',
              metrics=['accuracy'])
 
-model.fit(X_train, Y_train, batch_size=60, epochs=3, verbose=1)
+model.fit(X_train, Y_train, batch_size=60, epochs=4, verbose=1)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 
@@ -137,9 +147,7 @@ print(score)
 
 y_pred = model.predict(X_test.reshape(X_test.shape[0], nrap, nrap,1))
 
-print("y predict:")
-print(y_pred[:10])
-print("y test:")
-print(y_test[:10])
+for i in range(0,len(y_pred)):
+    print(y_pred[i][0], ",", y_pred[i][1], ",", y_test[i], resultClassifier(y_pred[i][1],60,5))
 
 model.save("../outputmodel1/Dataset2-2.h5")
