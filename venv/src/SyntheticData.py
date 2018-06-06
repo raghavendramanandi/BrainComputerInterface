@@ -106,7 +106,6 @@ model.add(Convolution2D(32, 3, 3, activation='relu', input_shape=(576,576,1)))
 model.add(Convolution2D(30, 1, activation='relu'))
 model.add(Convolution2D(20, 1, activation='relu'))
 model.add(Convolution2D(10, 1, activation='relu'))
-# model.add(Dense(500, activation='relu'))
 model.add(Convolution2D(2, 574))
 model.add(Flatten())
 model.add(Activation('softmax'))
@@ -122,7 +121,7 @@ print(X_train.shape)
 print("Y_train:")
 print(Y_train.shape)
 
-model.fit(X_train, Y_train, batch_size=40, epochs=3, verbose=1)
+model.fit(X_train, Y_train, batch_size=40, epochs=5, verbose=1)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 model.save('../outputmodel1/my_model.h5')
@@ -143,5 +142,4 @@ y_pred = model.predict(xnewtestxprocessed.reshape(xnewtestxprocessed.shape[0], 5
 
 
 for i in range(0,len(y_pred)):
-    print(y_pred[i][0], ",", y_pred[i][1], ",", y_test[i], resultClassifier(y_pred[i][1],60,5))
-
+    print(y_pred[i][0], ",", y_pred[i][1], ",", y_test[i], resultClassifier(y_pred[i][1],50,5))
