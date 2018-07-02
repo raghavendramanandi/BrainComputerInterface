@@ -121,12 +121,19 @@ print(X_train.shape)
 print("Y_train:")
 print(Y_train.shape)
 
-model.fit(X_train, Y_train, batch_size=40, epochs=5, verbose=1)
+model.fit(X_train, Y_train, batch_size=51, epochs=3, verbose=1)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 model.save('../outputmodel1/my_model.h5')
 print("Score:")
 print(score)
+
+y_pred = model.predict(X_test.reshape(X_test.shape[0], 576, 576,1))
+
+for i in range(0,len(y_pred)):
+    print(y_pred[i][0], ",", y_pred[i][1], ",", y_test[i])
+
+print("===============================================================================================================================================")
 
 xnewtestxprocessed = np.zeros([numberOfItems,576,576], dtype=float)
 
@@ -140,6 +147,5 @@ for i in range(0,140):
 
 y_pred = model.predict(xnewtestxprocessed.reshape(xnewtestxprocessed.shape[0], 576, 576,1))
 
-
 for i in range(0,len(y_pred)):
-    print(y_pred[i][0], ",", y_pred[i][1], ",", y_test[i], resultClassifier(y_pred[i][1],50,5))
+    print(y_pred[i][0], ",", y_pred[i][1], ",", y_test[i])
