@@ -1,4 +1,4 @@
-# Brain Computer
+# Brain Activity Classification And Understanding
 
 Electroencephalogram (EEG) is perhaps one of the simplest and easy ways to understand brain activities. EEG records the electrical signals produced by neurons amplifies them and show them as waveforms. If we can understand this waveform, then we can identify what our brain trying to do. Example: Consider an operation on the music system, say increasing and decreasing volume. If we can learn the waveform for volume increase and volume decrease, we can control volume without actually touching any device.
 
@@ -19,3 +19,5 @@ Session2
 Test data prediction: 18 correct of 20 trail
 
 Prediction time through loaded model, 0.8 sec for 20 trail. Why is it important?
+
+Thanks to all the sources for help with data, docs etc.
