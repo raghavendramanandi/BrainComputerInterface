@@ -21,3 +21,5 @@ Test data prediction: 18 correct of 20 trail
 Prediction time through loaded model, 0.8 sec for 20 trail. Why is it important?
 
 Thanks to all the sources for help with data, docs etc.
+
+It would be very cool if you we can control volume of phone or any electronic device using mind Activity
